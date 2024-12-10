@@ -1,3 +1,6 @@
 .DS_Store
 *.csv
 fire_data
+*.keras
+wandb
+*.png
