@@ -1,0 +1,17 @@
+2025-04-20 09:38:20,554 - __main__ - INFO - Statistics file checked
+2025-04-20 09:38:20,611 - __main__ - INFO - Application created successfully
+2025-04-20 09:38:20,612 - __main__ - INFO - Handlers added
+2025-04-20 09:38:20,612 - __main__ - INFO - Starting bot...
+2025-04-20 09:38:20,830 - telegram.ext.Application - INFO - Application started
+2025-04-20 09:40:28,137 - __main__ - INFO - User 216786311 sent message: Почему небо зеленое?
+2025-04-20 09:40:28,154 - __main__ - INFO - Logged action for user 216786311: question: Почему небо зеленое?
+2025-04-20 09:40:32,006 - __main__ - INFO - Logged action for user 216786311: answer
+2025-04-20 09:40:32,006 - __main__ - INFO - Sent cosmic poetry response to user 216786311
+2025-04-20 09:46:28,451 - __main__ - INFO - User 216786311 sent message: Do you work?
+2025-04-20 09:46:28,452 - __main__ - INFO - Logged action for user 216786311: question: Do you work?
+2025-04-20 09:46:31,799 - __main__ - INFO - Logged action for user 216786311: answer
+2025-04-20 09:46:31,799 - __main__ - INFO - Sent cosmic poetry response to user 216786311
+2025-04-20 09:49:21,887 - __main__ - INFO - User 216786311 sent message: How many months?
+2025-04-20 09:49:21,887 - __main__ - INFO - Logged action for user 216786311: question: How many months?
+2025-04-20 09:49:24,297 - __main__ - INFO - Logged action for user 216786311: answer
+2025-04-20 09:49:24,298 - __main__ - INFO - Sent cosmic poetry response to user 216786311 
