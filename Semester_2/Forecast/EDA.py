@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 # from ydata_profiling import ProfileReport
 import holidays
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import OneHotEncoder
 
 # 1. Загрузка данных
 def load_data():
@@ -122,7 +123,7 @@ def encode_codesum(df: pd.DataFrame) -> pd.DataFrame:
 
 def preprocess(path: str) -> pd.DataFrame:
     """Вся цепочка предобработки данных."""
-    df = load_data_from_file(path)
+    df = load_data_from_file('data/merged_data.csv')
     df = convert_numeric_columns(df)
     df = convert_time_columns(df)
     df = fill_missing(df)
@@ -220,7 +221,7 @@ def drop_highly_correlated_features(df):
     """Удаление высоко скоррелированных признаков."""
     drop_cols = [
         'resultspeed',  # сильно коррелирует с avgspeed
-        # 'tmax', 'tmin',  # сильно коррелируют с tavg
+        'tmax', 'tmin',  # сильно коррелируют с tavg
         'dewpoint', 'wetbulb',  # сильно коррелируют с tavg
         'heat', 'cool',  # сильно коррелируют с tavg
         'sealevel',  # сильно коррелирует с stnpressure
@@ -338,8 +339,7 @@ if __name__ == '__main__':
     
     df.to_csv('data/cleaned_data.csv', index=False)
     
-    features_to_scale = ['tmax',
-                'tmin',
+    features_to_scale = [
                 'tavg',
                 'depart',
                 'snowfall',
@@ -360,8 +360,22 @@ if __name__ == '__main__':
     df_scaled = df.copy()
     scaler = MinMaxScaler(feature_range=(-1, 1))
     df_scaled[features_to_scale] = scaler.fit_transform(df_scaled[features_to_scale])
+    df_scaled['unique_id'] = df_scaled['store_nbr'].astype(str) + '_' + df_scaled['item_nbr'].astype(str)
+    df_scaled = df_scaled.drop(columns=['store_nbr', 'item_nbr'])
+
+    enc = OneHotEncoder(sparse_output=False, dtype=int, handle_unknown='ignore')
+    ohe_array = enc.fit_transform(df_scaled[['station_nbr']])
+    ohe_cols = enc.get_feature_names_out(['station_nbr'])
+
+    df_ohe = pd.concat([
+        df_scaled.drop('station_nbr', axis=1),
+        pd.DataFrame(ohe_array, columns=ohe_cols, index=df_scaled.index)
+    ], axis=1)
+
+    print(df_ohe)
+
     
-    df_scaled.to_csv('data/data_for_modeling.csv', index=False)
+    df_ohe.to_csv('data/data_for_modeling.csv', index=False)
     
     # create_report(df)
 
