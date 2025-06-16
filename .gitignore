@@ -4,3 +4,5 @@ fire_data
 *.keras
 wandb
 *.png
+kaggle/*.json
+*jpeg
