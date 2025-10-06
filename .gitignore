@@ -6,3 +6,4 @@ wandb
 *.png
 kaggle/*.json
 *jpeg
+Semantic_segmentation_dataset/
